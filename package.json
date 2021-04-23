@@ -9,6 +9,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "build:prod": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +24,9 @@
   },
   "homepage": "https://github.com/matiastang/webpack-plugin-scaffold#readme",
   "devDependencies": {
-    "vuepress": "^1.8.2"
+    "babel-loader": "^8.2.2",
+    "vuepress": "^1.8.2",
+    "webpack": "^5.35.0",
+    "webpack-cli": "^4.6.0"
   }
 }

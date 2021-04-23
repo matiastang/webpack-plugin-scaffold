@@ -1,0 +1,27 @@
+{
+  "name": "webpack-plugin-scaffold",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiastang/webpack-plugin-scaffold.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matiastang/webpack-plugin-scaffold/issues"
+  },
+  "homepage": "https://github.com/matiastang/webpack-plugin-scaffold#readme",
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  }
+}

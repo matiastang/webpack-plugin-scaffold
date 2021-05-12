@@ -1,9 +1,9 @@
 /*
  * @Author: tangdaoyong
- * @Date: 2021-04-23 17:41:00
+ * @Date: 2021-05-11 18:15:18
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2021-05-11 18:08:14
- * @Description: webpack配置文件
+ * @LastEditTime: 2021-05-12 21:29:42
+ * @Description: file content
  */
 // const path = require('path');
 import path from 'path'
@@ -18,7 +18,7 @@ const OUTPUTPATH = path.resolve(__dirname, './dist');
 /* - 自定义webpack插件 - */
 
 // const RemoveCommentsPlugin = require('./plugin/remove-comments-plugin');
-import UnusedFilesWebpackPlugin from './plugin/unused';// 清除无用文件
+import RemoveUnusedFilesWebpackPlugin from './plugin/unused';// 清除无用文件
 
 // module.exports = {
 export default {
@@ -30,7 +30,7 @@ export default {
     plugins: [
         // new RemoveCommentsPlugin(),
         // 清除无用文件
-        new UnusedFilesWebpackPlugin({
+        new RemoveUnusedFilesWebpackPlugin({
             patterns: ['src/**']
         })
     ],
@@ -42,17 +42,35 @@ export default {
         // extensions: ['.js'],
         alias: { // 别名
             root: path.resolve(__dirname, 'src/'),
+            test1: path.resolve(__dirname, 'src/test1/'),
         }
     },
+    /*
+    babel-loader: 负责 es6 语法转化
+    babel-preset-env: 包含 es6、7 等版本的语法转化规则
+    babel-polyfill: es6 内置方法和函数转化垫片
+    babel-plugin-transform-runtime: 避免 polyfill 污染全局变量
+    Plugin/Preset files are not allowed to export objects, only functions
+    babel 7.0 版本的( @babel/core ， @babel/preset-react )
+　　也可命令查看 bebel-cli 的版本 （ babel -V ）
+　　也有 babel 6.0 版本的 ( babel-core@6.26.0 , babel-cli@6.26.0 , babel-preset-react@6.24.1 )
+
+    @babel/plugin-transform-async-to-generator // 把async函数转化成generator函数
+    */
     module: { // 加载器
         rules: [// 规则
-            // {
-            //     test: /\.js|jsx$/,            // 匹配文件
-            //     exclude: /node_modules/,      // 排除文件夹
-            //     // use: [
-            //     //     { loader: 'babel-loader' } // babel 加载器
-            //     // ]
-            // }
+            {
+                test: /\.js|jsx$/,            // 匹配文件
+                exclude: /node_modules/,      // 排除文件夹
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
+                    } // babel 加载器
+                ]
+            }
             // {
             //     test: /\.js|jsx$/,            // 匹配文件
             //     exclude: /node_modules/,      // 排除文件夹
